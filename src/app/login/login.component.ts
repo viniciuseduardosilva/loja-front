@@ -10,12 +10,11 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent  {
 
-  usermane: string;
+  username: string;
   password: string;
-  loginError: boolean;
   cadastrando: boolean;
   mensagemSucesso: string;
-  errors: string [];
+  errors: String [];
 
   constructor(
     private router: Router,
@@ -24,10 +23,11 @@ export class LoginComponent  {
   ) { }
   
   onSubmit(){
-    this.authService.tentarLogar(this.usermane, this.password)
+    this.authService.tentarLogar(this.username, this.password)
                 .subscribe(resposta =>{
+                  console.log('aaaaaaa');
                   const acess_token = JSON.stringify(resposta);
-                  localStorage.setItem('acess_token', acess_token)
+                  localStorage.setItem('access_token', acess_token)
                   this.router.navigate(['/home'])
                 }, errorResposta => {
                   this.errors = ['usuario ou senha incorreto']
@@ -45,14 +45,17 @@ export class LoginComponent  {
 
   cadastrar(){
     const usuario: Usuario = new Usuario();
-    usuario.username = this.usermane;
+    usuario.username = this.username;
     usuario.password = this.password;
     this.authService.salvar(usuario).subscribe( resposta => {
       this.mensagemSucesso = "cadastro realizado com sucesso"
-      this.loginError = false;
-    }, error => {
-      this.loginError = true;
+      this.cadastrando = false;
+      this.username = '';
+      this.password = '';
+      this.errors = [];
+    }, errorResposta => {
       this.mensagemSucesso = null;
+      this.errors = errorResposta.error.errors;
     }
       )
   }

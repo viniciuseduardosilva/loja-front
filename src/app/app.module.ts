@@ -25,12 +25,12 @@ import { TokenInterceptor } from './token.interceptor';
   ],
   imports: [
     BrowserModule,
-    TemplateModule,
-    AppRoutingModule,
-    ClientesModule,
-    HttpClientModule,
-    ServicoPrestadoModule,
     FormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    TemplateModule,
+    ClientesModule,
+    ServicoPrestadoModule,
   ],
   providers: [
     ClientesService,

@@ -10,21 +10,22 @@ import { environment } from '../environments/environment'
 })
 export class AuthService {
 
-  apiURL: string = `${environment.apiURL}/api/usuarios`;
+  apiURL: string = environment.apiURL+"/api/usuarios";
   tokenURL: string = environment.apiURL + environment.obterTokenUrl;
-  clientId: string = environment.clienteId;
-  clienteSecret: string = environment.clienteSecret
+  clientId: string = environment.clientId;
+  clientSecret: string = environment.clientSecret
   jwtHelper: JwtHelperService = new JwtHelperService();
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) {  }
 salvar( usuario: Usuario) : Observable<any>{
-  return this.http.post<any>(this.apiURL, usuario)
+  return this.http.post<any>(this.apiURL, usuario);
 }
 
 obterToken(){
-  const tokenString = localStorage.getItem('access_token')
+  const tokenString = localStorage.getItem('access_token');
+  console.log(tokenString);
   if(tokenString){
     const token = JSON.parse(tokenString).access_token
     return token;
@@ -60,11 +61,10 @@ tentarLogar(username: string, password: string) : Observable<any>{
                       .set('password', password)
                       .set('grant_type', 'password');
   const headers = {
-    
-    'Authorization': 'Basic '+btoa(`${ this.clientId}:${this.clienteSecret}`),
+    'Authorization': 'Basic '+btoa(`${ this.clientId}:${this.clientSecret}`),
     'Content-Type' : 'application/x-www-form-urlencoded'
   }
-  return this.http.post(this.tokenURL, params.toString, { headers })
+  return this.http.post(this.tokenURL, params.toString(), { headers })
 }
 
 }
