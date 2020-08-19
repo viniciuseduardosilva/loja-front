@@ -1,0 +1,50 @@
+<h1 class="mt-4">Serviço Prestado</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Novo</li>
+</ol>
+<div class="container">
+    <form #form="ngForm" (submit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Cliente: </label>
+                    <select class="form-control" [ngModelOptions]="{standalone: true}"
+                        [(ngModel)]="servicoPrestado.email">
+                        <option value="">Selecione...</option>
+                        <option *ngFor="let cliente of clientes" [ngValue]="cliente.email">
+                            {{ cliente.nome }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="">Descrição: </label>
+                    <input type="text" class="form-control" name="descricao" id="inputDescricao"
+                        [(ngModel)]="servicoPrestado.descricao">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Data: </label>
+                    <input type="text" class="form-control" name="data" id="inputData"
+                        [(ngModel)]="servicoPrestado.data">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Preço: </label>
+                    <input type="text" class="form-control" name="preco" id="inputPreco"
+                        [(ngModel)]="servicoPrestado.preco">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-success"> Salvar</button>
+            </div>
+        </div>
+    </form>
+</div>

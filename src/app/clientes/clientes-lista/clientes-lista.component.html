@@ -1,0 +1,74 @@
+
+    <h1 class="mt-4">Clientes</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Consultas</li>
+    </ol>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success" role="alert" *ngIf="msgSucesso">
+                   {{ msgSucesso }}
+                </div>
+                <div class="alert alert-success" role="alert" *ngIf="msgErro">
+                    {{ msgErro }}
+                 </div>
+
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-md-2">
+            <button class="btn btn-warning" (click)="novoCadastro()"><i class="fas fa-plus"></i> Novo</button>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th>email</th>
+                        <th>nome</th>
+                        <th>telefone</th>
+                        <th>Data cadastro</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let cliente of clientes">
+
+                    <td>{{ cliente.email }}</td>
+                    <td>{{ cliente.nome }}</td>
+                    <td>{{ cliente.telefone }}</td>
+                    <td>{{ cliente.cadastro }}</td>
+                    <td>
+                        <button class="btn btn-primary" routerLink="/clientes/form/{{ cliente.email }}">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button class="btn btn-danger" (click)="preparaDelecao(cliente)"
+                        data-toggle="modal" data-target="#modalDeletar">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+<div id="modalDeletar" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Confirmaçao</h4>
+            </div>
+            <div class="modal-body" *ngIf="clienteSelecionado">
+                Confirma a deleção do(a) Cliente {{ clienteSelecionado.nome }} ???
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success"(click)="deletarCliente()"
+                data-dismiss="modal" >Confirma</button>
+                <button class="btn btn-defaut" data-dismiss="modal">Cancela</button>
+            </div>
+        </div>
+    </div>
+</div>
+    
+</div>

@@ -1,0 +1,63 @@
+
+<h1 class="mt-4">Formulario</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">{{cliente.email ? 'Edição' : 'Cadastro'}}</li>
+</ol>
+
+<div class="container">
+    <form #clienteForm= "ngForm" (ngSubmit)="onSubmit()">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success" role="alert" *ngIf="sucesso == true">
+                    Cliente saolvo com sucesso!
+                </div>
+                <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
+                    {{erro}}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input  type="text" class="form-control" 
+                    [(ngModel)]= "cliente.email" name="email"/>
+                </div>
+            </div>
+            <div class="col-md-6" *ngIf="cliente.cadastro">
+                <div class="form-group">
+                    <label>Data Cadastro:</label>
+                    <input type="text" class="form-control" disabled="true"
+                    [ngModel]= "cliente.cadastro" name="cadastro"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Nome:</label>
+                    <input type="text" class="form-control"
+                    [(ngModel)]= "cliente.nome" name="nome"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Telefone:</label>
+                    <input type="text" class="form-control"
+                    [(ngModel)]= "cliente.telefone" name="telefone"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-share-square"></i> Salvar
+                </button>
+
+                <button type="button" class="btn btn-danger ml-1" (click)="voltarLista()">
+                    <i class="fas fa-arrow-alt-circle-left"></i> Voltar
+                </button>
+        </div>
+    </form>
+</div>
