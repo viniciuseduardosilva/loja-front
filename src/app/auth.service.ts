@@ -19,9 +19,11 @@ export class AuthService {
   constructor(
     private http: HttpClient,
   ) {  }
+
 salvar( usuario: Usuario) : Observable<any>{
   return this.http.post<any>(this.apiURL, usuario);
 }
+
 
 obterToken(){
   const tokenString = localStorage.getItem('access_token');
@@ -56,6 +58,7 @@ return false;
 }
 
 tentarLogar(username: string, password: string) : Observable<any>{
+  
   const params = new HttpParams()
                       .set('username', username )
                       .set('password', password)

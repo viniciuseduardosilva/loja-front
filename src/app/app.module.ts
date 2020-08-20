@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { LayoutComponent } from './layout/layout.component'
 import { AuthService } from './auth.service';
 import { TokenInterceptor } from './token.interceptor';
+import { ClienteDtoService } from './cliente-dto.service';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { TokenInterceptor } from './token.interceptor';
   providers: [
     ClientesService,
     ServicoPrestadoService,
+    ClienteDtoService,
     AuthService,
     {
       provide: HTTP_INTERCEPTORS,
